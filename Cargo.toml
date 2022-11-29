@@ -1,0 +1,35 @@
+[package]
+name = "spwm_generator"
+version = "0.1.0"
+edition = "2021"
+description = "A simple cli tool for genrate SPWM lookup tables"
+repository = "https://github.com/Ali-Mirghasemi/spwm_generator"
+categories = ["tool", "embedded"]
+keywords = [
+    "tool",
+    "genrator",
+    "spwm",
+    "pwm"
+]
+default-run = "spwm_generator"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+path = "lib/mod.rs"
+name = "spwm_generator"
+
+[[bin]]
+path = "src/main.rs"
+name = "spwm_generator"
+
+[dependencies]
+clap = { version = "4.0.26", features = ["derive"] }
+rayon = "1.6.0"
+
+[profile.release]
+opt-level = 3
+lto = true
+debug = false
+codegen-units = 1
+
