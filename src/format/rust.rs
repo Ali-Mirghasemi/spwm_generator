@@ -8,7 +8,7 @@ use super::Format;
 pub struct RustFile;
 
 impl Format for RustFile {
-    fn write(&self, spwm: &SPWM, width: usize, _sep: &str, buf: &mut BufWriter<std::fs::File>) -> Result<()> {
+    fn write(&self, name: &str, spwm: &SPWM, width: usize, _sep: &str, buf: &mut BufWriter<std::fs::File>) -> Result<()> {
         let table = spwm.lookup_table();
 
         let (ty, pad_width) = if spwm.pwm_top() >= 65536 {
@@ -21,7 +21,8 @@ impl Format for RustFile {
             ("u8", 3)
         };
 
-        writeln!(buf, "const WAV_{}[{}; {}] = [", 
+        writeln!(buf, "const {}_{}[{}; {}] = [", 
+            name,
             spwm.sin_freq(), 
             ty,
             table.len()
@@ -45,7 +46,7 @@ impl Format for RustFile {
 pub struct RustHexFile;
 
 impl Format for RustHexFile {
-    fn write(&self, spwm: &SPWM, width: usize, _sep: &str, buf: &mut BufWriter<std::fs::File>) -> Result<()> {
+    fn write(&self, name: &str, spwm: &SPWM, width: usize, _sep: &str, buf: &mut BufWriter<std::fs::File>) -> Result<()> {
         let table = spwm.lookup_table();
 
         let (ty, pad_width) = if spwm.pwm_top() >= 65536 {
@@ -58,7 +59,8 @@ impl Format for RustHexFile {
             ("u8", 2)
         };
 
-        writeln!(buf, "const WAV_{}[{}; {}] = [", 
+        writeln!(buf, "const {}_{}[{}; {}] = [", 
+            name,
             spwm.sin_freq(), 
             ty,
             table.len()
