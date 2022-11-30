@@ -24,10 +24,14 @@ impl Format for CFile {
         };
 
         writeln!(buf, "#include <stdint.h>\n\n")?;
-        writeln!(buf, "const {} TABLE_{}_{} = {{", 
+        writeln!(buf, "#define  WAV_{}_LEN    {}\n",
+            spwm.sin_freq(),
+            table.len(),
+        )?;
+        writeln!(buf, "const {} WAV_{}[WAV_{}_LEN] = {{", 
             ty,
             spwm.sin_freq(), 
-            spwm.carrier_freq(),
+            table.len(),
         )?;
 
         for row in table.chunks(width) {
@@ -62,10 +66,14 @@ impl Format for CHexFile {
         };
 
         writeln!(buf, "#include <stdint.h>\n\n")?;
-        writeln!(buf, "const {} TABLE_{}_{} = {{", 
+        writeln!(buf, "#define  WAV_{}_LEN    {}\n",
+            spwm.sin_freq(),
+            table.len(),
+        )?;
+        writeln!(buf, "const {} WAV_{}[WAV_{}_LEN] = {{", 
             ty,
             spwm.sin_freq(), 
-            spwm.carrier_freq(),
+            table.len()
         )?;
 
         for row in table.chunks(width) {
