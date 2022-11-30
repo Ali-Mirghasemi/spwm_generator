@@ -29,5 +29,5 @@ fn main() -> std::io::Result<()> {
         args::Format::Rust => &RustFile,
         args::Format::RustHex => &RustHexFile,
     };
-    writer.write(&spwm, args.row_width, &args.separator, &mut buf)
+    writer.write(&args.name, &spwm, args.row_width, &args.separator, &mut buf)
 }
