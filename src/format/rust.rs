@@ -21,9 +21,8 @@ impl Format for RustFile {
             ("u8", 3)
         };
 
-        writeln!(buf, "const TABLE_{}_{}[{}; {}] = [", 
+        writeln!(buf, "const WAV_{}[{}; {}] = [", 
             spwm.sin_freq(), 
-            spwm.carrier_freq(),
             ty,
             table.len()
         )?;
@@ -59,9 +58,8 @@ impl Format for RustHexFile {
             ("u8", 2)
         };
 
-        writeln!(buf, "const TABLE_{}_{}[{}; {}] = [", 
+        writeln!(buf, "const WAV_{}[{}; {}] = [", 
             spwm.sin_freq(), 
-            spwm.carrier_freq(),
             ty,
             table.len()
         )?;
