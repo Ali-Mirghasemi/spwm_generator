@@ -15,6 +15,6 @@ pub use c::*;
 pub use rust::*;
 
 pub trait Format {
-    fn write(&self, spwm: &SPWM, width: usize, sep: &str, buf: &mut BufWriter<File>) -> std::io::Result<()>;
+    fn write(&self, name: &str, spwm: &SPWM, width: usize, sep: &str, buf: &mut BufWriter<File>) -> std::io::Result<()>;
 }
 
