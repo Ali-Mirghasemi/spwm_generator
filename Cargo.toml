@@ -1,6 +1,6 @@
 [package]
 name = "spwm_generator"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2021"
 description = "A simple cli tool for genrate SPWM lookup tables"
 repository = "https://github.com/Ali-Mirghasemi/spwm_generator"
