@@ -9,8 +9,8 @@ use clap::{Parser, ValueEnum};
 pub struct Args {
     #[clap(short = 'f', long = "sin_freq", help = "sin wave frequency")]
     pub sin_freq:           f64,
-    #[clap(short = 'c', long = "carrier_freq", help = "carrier frequency")]
-    pub carrier_freq:       f64,
+    #[clap(short = 'n', long = "num_of_samples", help = "number of samples")]
+    pub num_of_samples:     usize,
     #[clap(short = 't', long = "pwm_top", default_value = "255", help = "pwm top value")]
     pub pwm_top:            usize,
     #[clap(short = 'p', long = "padding", default_value = "0", help = "padding for pwm min and max value")]
