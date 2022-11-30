@@ -11,7 +11,7 @@ fn main() {
     let duty_cycles = pwm.duty_cycles_fixed(0.0, 1.0, 16);
     println!("{:?}", duty_cycles);
 
-    let spwm = SPWM::new(1.0, 100.0, 1000, 0);
+    let spwm = SPWM::new(1.0, 100, 1000, 0);
     let table = spwm.lookup_table();
 
     print!("{:?}", table);
