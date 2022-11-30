@@ -12,19 +12,19 @@ cargo install spwm_generator
 
 ## Parameters
 ```
-Usage: spwm_generator.exe [OPTIONS] --sin_freq <SIN_FREQ> --carrier_freq <CARRIER_FREQ> --out <OUTPUT>
+Usage: spwm_generator.exe [OPTIONS] --sin_freq <SIN_FREQ> --num_of_samples <CARRIER_FREQ> --out <OUTPUT>
 
 Options:
-  -f, --sin_freq <SIN_FREQ>          sin wave frequency
-  -c, --carrier_freq <CARRIER_FREQ>  carrier frequency
-  -t, --pwm_top <PWM_TOP>            pwm top value [default: 255]
-  -p, --padding <PADDING>            padding for pwm min and max value [default: 0]
-  -o, --out <OUTPUT>                 output file path
-  -m, --format <FORMAT>              format [default: raw] [possible values: raw, raw-hex, c, c-hex, rust, rust-hex]
-  -w, --row_width <ROW_WIDTH>        number of samples in row [default: 16]
-  -s, --separator <SEPARATOR>        separator character [default: ", "]
-  -h, --help                         Print help information
-  -V, --version                      Print version information
+  -f, --sin_freq <SIN_FREQ>            sin wave frequency
+  -n, --num_of_samples <CARRIER_FREQ>  carrier frequency
+  -t, --pwm_top <PWM_TOP>              pwm top value [default: 255]
+  -p, --padding <PADDING>              padding for pwm min and max value [default: 0]
+  -o, --out <OUTPUT>                   output file path
+  -m, --format <FORMAT>                format [default: raw] [possible values: raw, raw-hex, c, c-hex, rust, rust-hex]
+  -w, --row_width <ROW_WIDTH>          number of samples in row [default: 16]
+  -s, --separator <SEPARATOR>          separator character [default: ", "]
+  -h, --help                           Print help information
+  -V, --version                        Print version information
 ```
 
 ## Example C
