@@ -14,7 +14,7 @@ fn main() -> std::io::Result<()> {
 
     let spwm = SPWM::new(
         args.sin_freq, 
-        args.carrier_freq, 
+        args.num_of_samples, 
         args.pwm_top, 
         args.padding
     );
