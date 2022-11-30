@@ -23,6 +23,8 @@ pub struct Args {
     pub row_width:          usize,
     #[clap(short = 's', long = "separator", default_value = ", ", help = "separator character")]
     pub separator:          String, 
+    #[clap(short = 'a', long = "name", default_value = "WAVE", help = "name of variable")]
+    pub name:               String, 
 }
 
 #[derive(Clone, Copy, ValueEnum)]
