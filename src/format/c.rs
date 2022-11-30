@@ -10,7 +10,7 @@ use super::Format;
 pub struct CFile;
 
 impl Format for CFile {
-    fn write(&self, spwm: &SPWM, width: usize, _sep: &str, buf: &mut BufWriter<std::fs::File>) -> Result<()> {
+    fn write(&self, name: &str, spwm: &SPWM, width: usize, _sep: &str, buf: &mut BufWriter<std::fs::File>) -> Result<()> {
         let table = spwm.lookup_table();
 
         let (ty, pad_width) = if spwm.pwm_top() >= 65536 {
@@ -24,14 +24,17 @@ impl Format for CFile {
         };
 
         writeln!(buf, "#include <stdint.h>\n\n")?;
-        writeln!(buf, "#define  WAV_{}_LEN    {}\n",
+        writeln!(buf, "#define  {}_{}_LEN    {}\n",
+            name,
             spwm.sin_freq(),
             table.len(),
         )?;
-        writeln!(buf, "const {} WAV_{}[WAV_{}_LEN] = {{", 
+        writeln!(buf, "const {} {}_{}[{}_{}_LEN] = {{", 
             ty,
+            name,
             spwm.sin_freq(), 
-            table.len(),
+            name,
+            spwm.sin_freq(),
         )?;
 
         for row in table.chunks(width) {
@@ -52,7 +55,7 @@ impl Format for CFile {
 pub struct CHexFile;
 
 impl Format for CHexFile {
-    fn write(&self, spwm: &SPWM, width: usize, _sep: &str, buf: &mut BufWriter<std::fs::File>) -> Result<()> {
+    fn write(&self, name: &str, spwm: &SPWM, width: usize, _sep: &str, buf: &mut BufWriter<std::fs::File>) -> Result<()> {
         let table = spwm.lookup_table();
 
         let (ty, pad_width) = if spwm.pwm_top() >= 65536 {
@@ -66,14 +69,17 @@ impl Format for CHexFile {
         };
 
         writeln!(buf, "#include <stdint.h>\n\n")?;
-        writeln!(buf, "#define  WAV_{}_LEN    {}\n",
+        writeln!(buf, "#define  {}_{}_LEN    {}\n",
+            name,
             spwm.sin_freq(),
             table.len(),
         )?;
-        writeln!(buf, "const {} WAV_{}[WAV_{}_LEN] = {{", 
+        writeln!(buf, "const {} {}_{}[{}_{}_LEN] = {{", 
             ty,
-            spwm.sin_freq(), 
-            table.len()
+            name,
+            spwm.sin_freq(),
+            name,
+            spwm.sin_freq(),
         )?;
 
         for row in table.chunks(width) {
