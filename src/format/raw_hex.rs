@@ -10,7 +10,7 @@ use super::Format;
 pub struct RawHex;
 
 impl Format for RawHex {
-    fn write(&self, spwm: &SPWM, width: usize, sep: &str, buf: &mut BufWriter<std::fs::File>) -> Result<()> {
+    fn write(&self, _name: &str, spwm: &SPWM, width: usize, sep: &str, buf: &mut BufWriter<std::fs::File>) -> Result<()> {
         let table = spwm.lookup_table();
 
         for row in table.chunks(width) {
