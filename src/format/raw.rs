@@ -1,8 +1,8 @@
-use std::io::{BufWriter, Result, Write};
+use std::{io::{BufWriter, Result, Write, Seek}, fs::File};
 
 use spwm_generator::SPWM;
 
-use super::Format;
+use super::{Format, UserSection, FormatArgs};
 
 
 
@@ -11,15 +11,22 @@ use super::Format;
 pub struct Raw;
 
 impl Format for Raw {
-    fn write(&self, _name: &str, spwm: &SPWM, width: usize, sep: &str, buf: &mut BufWriter<std::fs::File>) -> Result<()> {
+    fn write(&self, spwm: &SPWM, buf: &mut File, args: &FormatArgs) -> Result<()> {
         let table = spwm.lookup_table();
 
-        for row in table.chunks(width) {
+        let sections = UserSection::read_user_reign(buf)?;
+        buf.rewind()?;
+        buf.set_len(0)?;
+
+        sections.write(0, buf)?;
+        for row in table.chunks(args.width) {
             for val in row {
-                write!(buf, "{:3}{}", val, sep)?;
+                write!(buf, "{:3}{}", val, args.separator)?;
             }
             writeln!(buf, "")?;
         }
+        sections.write(1, buf)?;
+        sections.write_remains(2, buf)?;
         
         Ok(())
     }
