@@ -1,6 +1,6 @@
 [package]
 name = "spwm_generator"
-version = "0.2.0"
+version = "0.3.0"
 edition = "2021"
 description = "A simple cli tool for genrate SPWM lookup tables"
 repository = "https://github.com/Ali-Mirghasemi/spwm_generator"
@@ -27,6 +27,7 @@ name = "spwm_generator"
 [dependencies]
 clap = { version = "4.0.26", features = ["derive"] }
 rayon = "1.6.0"
+plotters = "0.3.4"
 
 [profile.release]
 opt-level = 3
