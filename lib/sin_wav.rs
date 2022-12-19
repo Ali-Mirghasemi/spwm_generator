@@ -2,6 +2,8 @@ use std::f64::consts::PI;
 
 use rayon::prelude::*;
 
+use crate::DutyCycle;
+
 /// Holder for sin wave parameters
 /// 
 /// ```rust
@@ -92,7 +94,7 @@ impl SinWave {
     /// println!("{:?}", samples);
     /// ```
     pub fn samples_range(&self, start_time: f64, end_time: f64, step: f64) -> Vec<f64> {
-        let num_samples = ((end_time - start_time) / step) as usize;
+        let num_samples = ((end_time - start_time) / step) as DutyCycle;
 
         self.samples(start_time, num_samples, step)
     }
@@ -105,7 +107,7 @@ impl SinWave {
     /// let samples = wave.samples_fixed(0.0, 1.0, 0.125);
     /// println!("{:?}", samples);
     /// ```
-    pub fn samples_fixed(&self, start_time: f64, end_time: f64, num_samples: usize) -> Vec<f64> {
+    pub fn samples_fixed(&self, start_time: f64, end_time: f64, num_samples: DutyCycle) -> Vec<f64> {
         let step = (end_time - start_time) / num_samples as f64;
         
         self.samples(start_time, num_samples, step)
@@ -119,7 +121,7 @@ impl SinWave {
     /// let samples = wave.samples(0.0, 4, 0.125);
     /// println!("{:?}", samples);
     /// ```
-    pub fn samples(&self, start_time: f64, num_samples: usize, step: f64) -> Vec<f64> {
+    pub fn samples(&self, start_time: f64, num_samples: DutyCycle, step: f64) -> Vec<f64> {
         (0..num_samples).into_par_iter()
             .map(|x| {
                 self.sample(start_time + x as f64 * step)
